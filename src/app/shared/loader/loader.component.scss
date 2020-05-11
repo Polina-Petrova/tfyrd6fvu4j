@@ -1,0 +1,76 @@
+.loader {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-top: 200px;
+  text-align: center;
+
+  &__text {
+    font-size: 20px;
+    color: gray;
+  }
+}
+
+// https://loading.io/css/
+
+.lds-heart {
+  display: inline-block;
+  position: relative;
+  width: 120px;
+  height: 120px;
+  transform: rotate(45deg);
+  transform-origin: 60px 60px;
+}
+
+.lds-heart div {
+  top: 48px;
+  left: 48px;
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  background: #fdd;
+  animation: lds-heart 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.lds-heart div:after,
+.lds-heart div:before {
+  content: " ";
+  position: absolute;
+  display: block;
+  width: 48px;
+  height: 48px;
+  background: #fdd;
+}
+
+.lds-heart div:before {
+  left: -24px;
+  border-radius: 50% 0 0 50%;
+}
+
+.lds-heart div:after {
+  top: -24px;
+  border-radius: 50% 50% 0 0;
+}
+
+@keyframes lds-heart {
+  0% {
+    transform: scale(0.95);
+  }
+  5% {
+    transform: scale(1.1);
+  }
+  39% {
+    transform: scale(0.85);
+  }
+  45% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(0.9);
+  }
+}

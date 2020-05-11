@@ -1,0 +1,64 @@
+<div class="hospitalization" *ngIf="!(isLoadHospitalizationList$ | async)">
+  <h2 class="filter__title">Фильтровать по:</h2>
+  <form [formGroup]="formFilter" class="filter">
+    <label class="filter__container">Id врача
+      <input class="filter__input" type="text" placeholder="123456" formControlName="doctorId">
+    </label>
+    <label class="filter__container">Id пациента
+      <input class="filter__input" type="text" placeholder="123456" formControlName="patientId">
+    </label>
+    <label class="filter__container">Диагнозу
+      <input class="filter__input" type="text" placeholder="Дизбактериоз" formControlName="diagnosis">
+    </label>
+    <label class="filter__container">Началу периода
+      <input class="filter__input" type="date" placeholder="10.05.2020" formControlName="dateStart">
+    </label>
+    <label class="filter__container">Концу периода
+      <input class="filter__input" type="date" placeholder="11.05.2020" formControlName="dateEnd">
+    </label>
+    <button class="filter__btn" (click)="onReset()">Сбросить фильтры</button>
+  </form>
+  <div class="hospitalization__table-header">
+    <div class="hospitalization__table-header-item"
+         [class.hospitalization__table-header-item--selected]="sortedType === 'id'"
+         (click)="onSorted('id')">id
+    </div>
+    <div class="hospitalization__table-header-item"
+         [class.hospitalization__table-header-item--selected]="sortedType === 'doctorId'"
+         (click)="onSorted('doctorId')">id врача
+    </div>
+    <div class="hospitalization__table-header-item"
+         [class.hospitalization__table-header-item--selected]="sortedType === 'patientId'"
+         (click)="onSorted('patientId')">id пациента
+    </div>
+    <div class="hospitalization__table-header-item"
+         [class.hospitalization__table-header-item--selected]="sortedType === 'date'"
+         (click)="onSorted('date')">Дата
+    </div>
+    <div class="hospitalization__table-header-item"
+         [class.hospitalization__table-header-item--selected]="sortedType === 'diagnosis'"
+         (click)="onSorted('diagnosis')">Диагноз
+    </div>
+  </div>
+  <div class="hospitalization__table" (click)="onOpenPopup(hospitalization)"
+       *ngFor="let hospitalization of hospitalizationList">
+    <div class="hospitalization__table-item">{{hospitalization.id}}</div>
+    <div class="hospitalization__table-item">{{hospitalization.doctorId}}</div>
+    <div class="hospitalization__table-item">{{hospitalization.patientId}}</div>
+    <div class="hospitalization__table-item">{{hospitalization.date | date:'dd.MM.yyyy'}}</div>
+    <div class="hospitalization__table-item">{{hospitalization.diagnosis}}</div>
+  </div>
+
+  <div class="paginator">
+    <button class="paginator__btn" (click)="onPrevPage()" [disabled]="currentPage <= 1">
+      Назад
+    </button>
+    <button class="paginator__btn" (click)="onNextPage()" [disabled]="currentPage >= (pagesCount$ | async)">
+      Далее
+    </button>
+  </div>
+</div>
+
+<app-loader *ngIf="isLoadHospitalizationList$ | async"></app-loader>
+
+<app-hospitalization-popup #hospitalizationPopup></app-hospitalization-popup>

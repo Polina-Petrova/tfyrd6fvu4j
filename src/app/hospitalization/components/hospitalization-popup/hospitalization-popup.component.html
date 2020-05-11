@@ -1,0 +1,13 @@
+<div *ngIf="hospitalization" (click)="onCloseByOverlayClick($event.target)"
+     [style.display]="isShow ? 'block' : 'none'" class="popup__wrapper">
+  <div class="popup__content">
+    <h1 class="popup__title">Информация о госпитализации</h1>
+    <p class="popup__content-item">id госпитализации: {{hospitalization.id}}</p>
+    <p class="popup__content-item">id врача: {{hospitalization.doctorId}}</p>
+    <p class="popup__content-item">Имя врача: {{doctor.name}}</p>
+    <p class="popup__content-item">id пациента: {{hospitalization.patientId}}</p>
+    <p class="popup__content-item">Имя пациента: {{patient.name}}</p>
+    <p class="popup__content-item">Диагноз: {{hospitalization.diagnosis}}</p>
+    <p class="popup__content-item">Дата: {{hospitalization.date | date:'dd.MM.yyyy'}}</p>
+  </div>
+</div>
